@@ -1,0 +1,16 @@
+{
+  "name": "happy-birthday-master",
+  "version": "1.0.0",
+  "description": "Happy Birthday Website made using Html, css and JavaScript <a href=\"https://programmergaurav.github.io/happy-birthday/?name=Gaurav\" target=\"blank\">Click Here</a>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server --port=3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

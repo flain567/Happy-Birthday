@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Chapter 21 — A Milestone Birthday Archive ✨</title>
+  <meta name="description" content="Album kenangan interaktif perayaan ulang tahun ke-21 dengan 11 foto, 1 video spesial, dan lagu What If I Call.">
+  
+  <!-- Google Fonts: Editorial Serif + Handwriting -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <!-- Visual Ambience Layers -->
+  <div class="film-grain"></div>
+  <canvas id="starsCanvas"></canvas>
+  <canvas id="matrixCanvas"></canvas>
+  <canvas id="fireworksCanvas"></canvas>
+  <div class="ambient-glow"></div>
+
+  <!-- Background Audio (What If I Call) -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="assets/audio/what-if-i-call.mp3" type="audio/mpeg">
+    <source src="assets/audio/what-if-i-call.aac" type="audio/aac">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Top Action Controls -->
+  <div class="top-actions">
+    <button class="action-circle-btn" id="fireworkActionBtn" title="Kembang Api Perayaan">🎆</button>
+    <button class="action-circle-btn" id="fullscreenBtn" title="Layar Penuh">⛶</button>
+    <button class="action-circle-btn" id="settingsBtn" title="Pengaturan & Media">⚙️</button>
+  </div>
+
+  <!-- Floating Music Player HUD (What If I Call) -->
+  <div class="floating-music-hud" id="musicHud">
+    <div class="vinyl-disc" id="vinylDisc">
+      <div class="vinyl-center"></div>
+    </div>
+    <div class="track-info">
+      <span class="track-title">What If I Call</span>
+      <span class="track-artist">Soundtrack of Chapter 21</span>
+    </div>
+    <button class="music-toggle-btn" id="musicToggleBtn" title="Putar/Jeda Lagu">▶</button>
+  </div>
+
+  <!-- =========================================
+       SCREEN 1: LUXURY WAX-SEALED ENVELOPE (21)
+  ========================================= -->
+  <section class="app-screen envelope-screen" id="giftScreen">
+    <div class="envelope-wrapper">
+      <div class="milestone-badge">A Milestone Celebration • Chapter 21</div>
+      <h1 class="hero-title">Welcome to <em>Twenty-One</em></h1>
+      <p class="hero-subtitle">Sebuah arsip kenangan berharga yang dirangkum khusus untukmu.</p>
+      
+      <!-- Wax-Sealed Keepsake Envelope -->
+      <div class="luxury-envelope" id="giftBox">
+        <div class="envelope-flap"></div>
+        <div class="envelope-fold-left"></div>
+        <div class="envelope-fold-right"></div>
+        <div class="wax-seal">
+          <span>21</span>
+        </div>
+      </div>
+
+      <button class="open-prompt-btn" id="openGiftBtn">
+        <span>Buka Lembaran Kenangan</span>
+        <span>✨</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SCREEN 2: CINEMATIC CHAPTER PROLOGUE
+  ========================================= -->
+  <section class="app-screen sequence-screen hidden" id="matrixScreen">
+    <div class="prologue-container">
+      <div class="prologue-tag">THE ARCHIVE</div>
+      <div class="prologue-text" id="sequenceWord">CHAPTER 21</div>
+    </div>
+    <button class="prologue-skip-btn" id="skipSequenceBtn">Buka Buku ➔</button>
+  </section>
+
+  <!-- =========================================
+       SCREEN 3: 3D INTERACTIVE MEMORY BOOK
+  ========================================= -->
+  <section class="app-screen book-screen hidden" id="bookScreen">
+    <div class="book-stage">
+      <div class="book-wrapper" id="bookWrapper">
+
+        <!-- LEAF 0: Front = Hardcover Chapter 21 | Back = Photo 1 -->
+        <div class="book-page">
+          <div class="page-face page-front cover-face">
+            <div class="cover-inner-border">
+              <span class="cover-chapter-tag">Memories • Chapter 21</span>
+              <div>
+                <h2 class="cover-main-title">Happy Birthday</h2>
+                <div class="cover-numeral">21</div>
+                <h3 class="cover-name" id="coverRecipient">My Favorite Person</h3>
+              </div>
+              <div class="cover-hint">
+                <span>📖 Klik lembaran untuk membuka album</span>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 01</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo1.jpg" onerror="this.onerror=null; this.src='assets/images/photo1.svg';" alt="Foto 1" loading="lazy">
+                </div>
+                <div class="polaroid-title">Where The Story Began</div>
+                <div class="polaroid-caption-text">Langkah pertama menuju momen-momen indah</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEAF 1: Front = Photo 2 | Back = Photo 3 -->
+        <div class="book-page">
+          <div class="page-face page-front">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 02</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo2.jpg" onerror="this.onerror=null; this.src='assets/images/photo2.svg';" alt="Foto 2" loading="lazy">
+                </div>
+                <div class="polaroid-title">Pure Radiance</div>
+                <div class="polaroid-caption-text">Senyum manis yang selalu menenangkan</div>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 03</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo3.jpg" onerror="this.onerror=null; this.src='assets/images/photo3.svg';" alt="Foto 3" loading="lazy">
+                </div>
+                <div class="polaroid-title">Rainy Days & Laughter</div>
+                <div class="polaroid-caption-text">Keceriaan di setiap rintik hujan</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEAF 2: Front = Photo 4 | Back = Photo 5 -->
+        <div class="book-page">
+          <div class="page-face page-front">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 04</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo4.jpg" onerror="this.onerror=null; this.src='assets/images/photo4.svg';" alt="Foto 4" loading="lazy">
+                </div>
+                <div class="polaroid-title">Late Night Conversations</div>
+                <div class="polaroid-caption-text">Obrolan larut malam yang selalu dirindukan</div>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 05</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo5.jpg" onerror="this.onerror=null; this.src='assets/images/photo5.svg';" alt="Foto 5" loading="lazy">
+                </div>
+                <div class="polaroid-title">Golden Hour Glow</div>
+                <div class="polaroid-caption-text">Cahaya senja yang kalah indah dari dirimu</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEAF 3: Front = Photo 6 | Back = Photo 7 -->
+        <div class="book-page">
+          <div class="page-face page-front">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 06</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo6.jpg" onerror="this.onerror=null; this.src='assets/images/photo6.svg';" alt="Foto 6" loading="lazy">
+                </div>
+                <div class="polaroid-title">Wanderlust & Freedom</div>
+                <div class="polaroid-caption-text">Menjelajahi dunia bersama</div>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 07</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo7.jpg" onerror="this.onerror=null; this.src='assets/images/photo7.svg';" alt="Foto 7" loading="lazy">
+                </div>
+                <div class="polaroid-title">My Favorite View</div>
+                <div class="polaroid-caption-text">Pemandangan terbaik yang pernah ada</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEAF 4: Front = Photo 8 | Back = Photo 9 -->
+        <div class="book-page">
+          <div class="page-face page-front">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 08</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo8.jpg" onerror="this.onerror=null; this.src='assets/images/photo8.svg';" alt="Foto 8" loading="lazy">
+                </div>
+                <div class="polaroid-title">Warm Coffee Moments</div>
+                <div class="polaroid-caption-text">Secangkir kehangatan dan obrolan manis</div>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 09</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo9.jpg" onerror="this.onerror=null; this.src='assets/images/photo9.svg';" alt="Foto 9" loading="lazy">
+                </div>
+                <div class="polaroid-title">Gentle Comfort</div>
+                <div class="polaroid-caption-text">Pelukan hangat yang menjadi tempat pulang</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEAF 5: Front = Photo 10 | Back = Photo 11 -->
+        <div class="book-page">
+          <div class="page-face page-front">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 10</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo10.jpg" onerror="this.onerror=null; this.src='assets/images/photo10.svg';" alt="Foto 10" loading="lazy">
+                </div>
+                <div class="polaroid-title">A Million Little Things</div>
+                <div class="polaroid-caption-text">Hal-hal kecil yang membuatmu begitu istimewa</div>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>ARCHIVE 11</span>
+                <span>CHAPTER 21</span>
+              </div>
+              <div class="editorial-polaroid">
+                <div class="washi-tape-subtle"></div>
+                <div class="polaroid-img-box">
+                  <img src="assets/images/photo11.jpg" onerror="this.onerror=null; this.src='assets/images/photo11.svg';" alt="Foto 11" loading="lazy">
+                </div>
+                <div class="polaroid-title">Twenty-One & Forever</div>
+                <div class="polaroid-caption-text">Untuk setiap langkah di babak baru ini</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEAF 6: Front = 1 Dedicated Video | Back = 21st Birthday Wish & Candle -->
+        <div class="book-page">
+          <div class="page-face page-front">
+            <div class="inner-page-content">
+              <div class="editorial-header">
+                <span>SPECIAL CINEMA</span>
+                <span>CHAPTER 21</span>
+              </div>
+              
+              <div class="video-wrapper-box">
+                <video id="memoryVideo" controls playsinline preload="metadata">
+                  <source src="assets/video/video.mp4" type="video/mp4">
+                  Browser Anda tidak mendukung tag video.
+                </video>
+              </div>
+
+              <div class="video-info-badge">
+                <span>🎬 Musik latar otomatis terjeda saat video diputar</span>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back">
+            <div class="wish-page-box">
+              <div class="editorial-header">
+                <span>DEDICATION</span>
+                <span>CHAPTER 21</span>
+              </div>
+              
+              <div class="letter-quote">
+                <p>Happy birthday, sayang. ❤️</p>
+                <br>
+                <p>Selamat bertambah usia. Aku berharap di usia kamu yang sekarang, kamu selalu diberikan kesehatan, kebahagiaan, dan kemudahan dalam setiap langkah yang kamu ambil. Semoga apa pun yang sedang kamu perjuangkan bisa menemukan jalannya, dan semoga kamu selalu punya alasan untuk bersyukur, bahkan di tengah keadaan yang nggak mudah.</p>
+                <br>
+                <p>Di hari spesial kamu ini, aku juga mau minta maaf untuk semua kesalahan aku selama kita bersama. Maaf kalau ada sikap dan perkataan aku yang pernah nyakitin kamu, kalau ada hal yang seharusnya bisa aku pahami tapi justru aku abaikan, atau kalau terkadang aku terlalu sibuk dengan diri sendiri sampai lupa memahami perasaan kamu.</p>
+                <br>
+                <p>Aku sadar, menyayangi seseorang bukan cuma soal bilang cinta, tapi juga soal bagaimana kita memperlakukan, menghargai, dan menjaga perasaannya. Aku tahu aku masih punya banyak kekurangan, dan mungkin ada beberapa hal yang sampai sekarang masih bikin kamu kecewa. Aku nggak mau membenarkan kesalahan aku, apalagi menganggap semuanya selesai hanya karena aku sudah meminta maaf.</p>
+                <br>
+                <p>Jujur, ada rasa sedih ketika aku menyadari bahwa orang yang begitu berarti buat aku pernah merasa terluka karena sikap aku sendiri. Seharusnya aku bisa lebih menjaga kamu, lebih mendengarkan, dan lebih memahami tanpa harus selalu menunggu kamu menjelaskan apa yang kamu rasakan.</p>
+                <br>
+                <p>Terima kasih karena sudah hadir dalam hidup aku dan menjadi bagian dari perjalanan aku sampai hari ini. Terima kasih untuk waktu, perhatian, dan semua hal yang sudah kamu berikan. Aku mungkin nggak selalu bisa membalas semuanya dengan cara yang tepat, tapi aku menghargai setiap hal yang sudah kita lewati bersama, termasuk saat kita nggak baik-baik saja.</p>
+                <br>
+                <p>Untuk ke depannya, aku berharap kita bisa terus belajar memahami satu sama lain. Aku ingin memperbaiki hal-hal yang memang masih kurang dari diri aku, bukan sekadar lewat janji, tetapi juga lewat sikap dan tindakan. Aku tahu hubungan yang baik nggak dibangun oleh satu orang saja, tapi aku ingin tetap mengambil tanggung jawab atas bagian aku.</p>
+                <br>
+                <p>Sekali lagi, selamat ulang tahun. Semoga tahun ini membawa banyak hal baik untuk kamu, semoga kamu semakin dekat dengan semua impian kamu, dan semoga kamu selalu dikelilingi hal-hal yang membuat hidup kamu terasa lebih berarti.</p>
+                <br>
+                <p>Aku bahagia bisa mengenal kamu dan menjadi bagian dari hidup kamu. Semoga kita masih diberi kesempatan untuk tumbuh bersama, melewati banyak hal, dan menciptakan lebih banyak kenangan baik ke depannya.</p>
+                <br>
+                <p><strong>Aku sayang kamu. Maaf untuk segala hal yang pernah menyakitimu, dan terima kasih karena sudah menjadi seseorang yang begitu berarti buat aku. ❤️</strong></p>
+              </div>
+
+              <!-- Interactive 21st Candle -->
+              <div class="candle-altar" id="cakeContainer">
+                <div class="cake-minimal">
+                  <div class="cake-frosting"></div>
+                  <div class="single-candle">
+                    <div class="candle-flame" id="cakeFlame" title="Klik untuk meniup lilin"></div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="blow-action-btn" id="blowCandleBtn">🎂 Tiup Lilin Harapan ke-21</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEAF 7: Closing Back Cover -->
+        <div class="book-page">
+          <div class="page-face page-front cover-face">
+            <div class="cover-inner-border">
+              <span class="cover-chapter-tag">Chapter 21 • Epilogue</span>
+              <div>
+                <h2 class="cover-main-title">Happy 21st!</h2>
+                <p style="margin-top: 15px; font-size: 1.05rem; line-height: 1.6; color: var(--gold); font-family: var(--font-serif);">
+                  Cheers to twenty-one years of wonderful you, and to all the beautiful chapters yet to be written. 🥂
+                </p>
+              </div>
+              <div class="cover-hint">
+                <span>Made with all my love ❤️</span>
+              </div>
+            </div>
+          </div>
+          <div class="page-face page-back" style="background: #0f0d14;"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="book-nav-controls">
+      <button class="nav-btn" id="prevPageBtn" title="Halaman Sebelumnya" disabled>❮</button>
+      <span class="page-indicator" id="pageIndicator">0 / 8</span>
+      <button class="nav-btn" id="nextPageBtn" title="Halaman Selanjutnya">❯</button>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SETTINGS & MEDIA UPLOADER MODAL
+  ========================================= -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="settings-card">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ Kustomisasi Chapter 21</h3>
+        <button class="modal-close-btn" id="closeSettingsBtn">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Nama yang Berulang Tahun:</label>
+        <input type="text" class="form-input" id="recipientNameInput" placeholder="Contoh: Anita / Sayang / Nama Panggilan" value="My Favorite Person">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Upload 11 Foto Sekaligus (Langsung di Browser):</label>
+        <div class="uploader-box" onclick="document.getElementById('photoFileInput').click()">
+          <p>📷 Klik di sini untuk memilih 11 foto dari galeri/folder</p>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">(Atau simpan file di assets/images/photo1.jpg s/d photo11.jpg)</span>
+        </div>
+        <input type="file" id="photoFileInput" multiple accept="image/*" style="display: none;">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Upload 1 Video Kenangan:</label>
+        <div class="uploader-box" onclick="document.getElementById('videoFileInput').click()">
+          <p>🎬 Klik di sini untuk memilih 1 file video (MP4/WebM)</p>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">(Atau simpan file di assets/video/video.mp4)</span>
+        </div>
+        <input type="file" id="videoFileInput" accept="video/*" style="display: none;">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Upload Lagu Latar ("What If I Call"):</label>
+        <div class="uploader-box" onclick="document.getElementById('audioFileInput').click()">
+          <p>🎵 Klik di sini untuk memilih file audio MP3</p>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">(Atau simpan file di assets/audio/what-if-i-call.mp3)</span>
+        </div>
+        <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
+      </div>
+
+      <button class="modal-save-btn" id="saveSettingsBtn">💾 Simpan Perubahan</button>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <img src="" alt="Enlarged Memory Photo" class="lightbox-image" id="lightboxImg">
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/matrix.js"></script>
+  <script src="js/fireworks.js"></script>
+  <script src="js/book.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
